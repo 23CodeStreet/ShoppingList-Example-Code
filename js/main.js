@@ -1,3 +1,9 @@
+// This will be our application state, which to begin with
+// is just an empty array.
+//
+// When the user wants to add an item, the javascript will add it to
+// this array, and then update the HTML based on what this contains.
+var shoppingList = [];
 
 // get a single HTML tag
 // selector is a CSS style selector e.g. 'li.myclass'
@@ -12,6 +18,15 @@ function getTag(selector, number) {
 // selector is a CSS style selector e.g. 'li.myclass'
 function getAllTags(selector) {
   return document.querySelectorAll(selector);
+}
+
+// This will loop through the items in the shoppingList array
+// and add the correct HTML elements to the list
+function renderHtmlList() {
+  for (var i = 0; i < shoppingList.length; i = i + 1) {
+    var itemNameToAdd = shoppingList[i];
+    addItemElementToList(itemNameToAdd);
+  }
 }
 
 // Takes the name of an item to add to the list
@@ -48,7 +63,8 @@ function buttonClickHandler(){
   var itemName = getItemNameFromInput();
 
   if (itemName.length > 0) {
-    addItemElementToList(itemName);
+    shoppingList.push(itemName);
+    renderHtmlList(itemName);
   } else {
     alert("You didn't enter an item!");
   }
