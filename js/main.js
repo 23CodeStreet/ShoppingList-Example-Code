@@ -23,11 +23,35 @@ function getAllTags(selector) {
 // This will loop through the items in the shoppingList array
 // and add the correct HTML elements to the list
 function renderHtmlList() {
+  clearHtmlList();
   for (var i = 0; i < shoppingList.length; i = i + 1) {
     var itemNameToAdd = shoppingList[i];
     addItemElementToList(itemNameToAdd);
   }
 }
+
+// Get the HTML list element and remove all it's children
+// so the shopping list can be fully re-rendered without
+// adding the same item multiple times
+//
+// There are a couple of subtle things here which are due to looping
+// over an array that we're also changing
+function clearHtmlList() {
+  var htmlList = getTag("ul", 0);
+
+  // Get the length in its own variable, not in the loop setup
+  // otherwise as we remove child nodes the list length will change
+  var length = htmlList.childNodes.length;
+
+  for (var i = 0; i < length; i = i + 1) {
+
+    // always remove the first element instead of using [i]
+    // again, because we're changing the list
+    var el = htmlList.childNodes[0];
+    htmlList.removeChild(el);
+  }
+}
+
 
 // Takes the name of an item to add to the list
 // Creates the new HTML element with the name given
