@@ -64,11 +64,16 @@ function addItemElementToList(itemName) {
   htmlList.appendChild(newItemElement);
 }
 
-// Get the input box element from the HTML and
-// return the string value from it
+// Get the input box element from the HTML
+// Set the input box value to be blank
+// Return the string value
 function getItemNameFromInput(){
   var inputElement = getTag("input", 0);
-  return inputElement.value;
+  var newName = inputElement.value;
+
+  // This is how to make an input element blank again
+  inputElement.value = "";
+  return newName;
 }
 
 // Loop through all the items in the list and
