@@ -59,7 +59,12 @@ function clearHtmlList() {
 function addItemElementToList(itemName) {
   var htmlList = getTag("ul", 0);
   var newItemElement = document.createElement("li");
-  newItemElement.innerText = itemName;
+
+  // This is actually a more correct way of adding text
+  // into an html element
+  var itemNameText = document.createTextNode(itemName);
+  newItemElement.appendChild(itemNameText);
+
   newItemElement.className = "list__item";
   htmlList.appendChild(newItemElement);
 }
